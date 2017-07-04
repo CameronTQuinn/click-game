@@ -9,6 +9,11 @@ You are free to write your own css code (in a separate file of course) and using
 * You are not allowed to change anything in client/index.html whithout writing javascript to change it for you.
 * We have already added the scriptelement last in the index.html
 
+### Bonus task
+Webpack is beeing used to "compile" our javascript code and making sure that dependencies are managed. However, webpack can also be used to bundle and dynamicly load our stylesheets. Insteed of dynamicly adding a style-element using the DOM-api you could simply write:
+`require('../css/style.css')` 
+in your app.js and you are finnished.  
+
 |  |  |
 | ------------- | ------------- |
 |  branch | [lnu-it](https://github.com/CS-LNU-Learning-Objects/client-side-javascript-exercise/tree/lnu-it) |
