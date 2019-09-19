@@ -28,7 +28,9 @@
   "engines": {
     "node": ">=7.0.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "audit": "0.0.6"
+  },
   "devDependencies": {
     "css-loader": "^1.0.0",
     "file-loader": "^2.0.0",
@@ -45,5 +47,10 @@
   "scripts": {
     "debug": "webpack-dev-server",
     "start": "webpack-dev-server"
+  },
+  "standard": {
+    "env": {
+      "browser": true
+    }
   }
 }
