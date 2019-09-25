@@ -1,1 +1,3 @@
-console.log('Hello World!!')
+import { ex01 } from './exercises'
+
+ex01()
