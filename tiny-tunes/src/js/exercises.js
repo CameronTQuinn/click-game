@@ -24,4 +24,15 @@ function ex04 () {
   pTag.style.color = 'red'
 }
 
-export { ex01, ex02, ex03, ex04 }
+function ex05 () {
+  const greyBox = document.querySelector('div.greybox')
+  function createPopUp () {
+    const e = document.createElement('p')
+    const t = document.createTextNode('You clicked!')
+    const hTag = document.querySelector('#step05')
+    hTag.appendChild(e).appendChild(t)
+  }
+  greyBox.addEventListener('click', createPopUp)
+}
+
+export { ex01, ex02, ex03, ex04, ex05 }
