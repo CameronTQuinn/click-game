@@ -1,1 +1,2 @@
-// your code here
+import { parseDOM } from './stuff.js'
+parseDOM()
