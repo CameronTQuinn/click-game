@@ -1,1 +1,3 @@
-console.log('click click')
+import { main } from './clickGame.js'
+main()
+main()
