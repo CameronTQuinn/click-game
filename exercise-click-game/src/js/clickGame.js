@@ -124,27 +124,42 @@ const game = function (clickColor) {
   // If player gets all three, WIN!
   // If player runs out of Time, LOSE!
   let count = 0
+  let time = 20
+  const timeDisplay = document.createElement('h2')
+  const appendAt = document.getElementById('time')
+  timeDisplay.setAttribute('style', 'color:red')
+  appendAt.appendChild(timeDisplay)
+  const timer = setInterval(function () {
+    if (time === 0) {
+      restartGame(true)
+      time = 20
+    } else {
+      time--
+      console.log(time)
+      timeDisplay.innerHTML = `${time}`
+    }
+  }, 1000)
   const c1r1 = document.querySelector('#board > div:nth-child(2)')
-  c1r1.addEventListener('click', function (event) { count = onClick(event, count, clickColor, 'left') })
+  c1r1.addEventListener('click', function (event) { count = onClick(event, timer, count, clickColor, 'left') })
   const c2r1 = document.querySelector('#board > div:nth-child(3)')
-  c2r1.addEventListener('click', function (event) { count = onClick(event, count, clickColor, 'center') })
+  c2r1.addEventListener('click', function (event) { count = onClick(event, timer, count, clickColor, 'center') })
   const c3r1 = document.querySelector('#board > div:nth-child(1)')
-  c3r1.addEventListener('click', function (event) { count = onClick(event, count, clickColor, 'right') })
+  c3r1.addEventListener('click', function (event) { count = onClick(event, timer, count, clickColor, 'right') })
   const c1r2 = document.querySelector('#board > div:nth-child(5)')
-  c1r2.addEventListener('click', function (event) { count = onClick(event, count, clickColor, 'left') })
+  c1r2.addEventListener('click', function (event) { count = onClick(event, timer, count, clickColor, 'left') })
   const c2r2 = document.querySelector('#board > div:nth-child(6)')
-  c2r2.addEventListener('click', function (event) { count = onClick(event, count, clickColor, 'center') })
+  c2r2.addEventListener('click', function (event) { count = onClick(event, timer, count, clickColor, 'center') })
   const c3r2 = document.querySelector('#board > div:nth-child(4)')
-  c3r2.addEventListener('click', function (event) { count = onClick(event, count, clickColor, 'right') })
+  c3r2.addEventListener('click', function (event) { count = onClick(event, timer, count, clickColor, 'right') })
   const c1r3 = document.querySelector('#board > div:nth-child(8)')
-  c1r3.addEventListener('click', function (event) { count = onClick(event, count, clickColor, 'left') })
+  c1r3.addEventListener('click', function (event) { count = onClick(event, timer, count, clickColor, 'left') })
   const c2r3 = document.querySelector('#board > div:nth-child(9)')
-  c2r3.addEventListener('click', function (event) { count = onClick(event, count, clickColor, 'center') })
+  c2r3.addEventListener('click', function (event) { count = onClick(event, timer, count, clickColor, 'center') })
   const c3r3 = document.querySelector('#board > div:nth-child(7)')
-  c3r3.addEventListener('click', function (event) { count = onClick(event, count, clickColor, 'right') })
+  c3r3.addEventListener('click', function (event) { count = onClick(event, timer, count, clickColor, 'right') })
 }
 
-const onClick = function (event, count, clickColor, pos) {
+const onClick = function (event, timer, count, clickColor, pos) {
   console.log(count)
   console.log(pos)
   const tar = event.target
@@ -161,12 +176,13 @@ const onClick = function (event, count, clickColor, pos) {
   }
   if (count === 3) {
     console.log('Done')
-    restart()
+    clearInterval(timer)
+    restartGame()
   }
   return count
 }
 
-const restart = function () {
+const restartGame = function () {
   const appendAt = document.getElementsByClassName('container')[0]
   const winLabel = document.createElement('h2')
   winLabel.innerHTML = 'You have won!'
