@@ -4,8 +4,6 @@ const getClickColor = function () {
   // Click color
   var keys1 = Object.keys(colorsEnum)
   const clickColor = colorsEnum[keys1[Math.floor(keys1.length * Math.random())]]
-  console.log(keys1[clickColor])
-  console.log(clickColor)
   const clickColorLoc = document.querySelector('#colorToClick')
   clickColorLoc.setAttribute('style', `color:${keys1[clickColor]}`)
   clickColorLoc.innerHTML = `Color to Click: ${keys1[clickColor]}`
@@ -17,107 +15,68 @@ const getColor = function (board) {
   let redCount = 0
   let yellowCount = 0
   for (let i = 0; i < board.length; i++) {
-    console.log(i)
     var keys2 = Object.keys(colorsEnum)
-    console.log('keys2: ' + keys2)
     const newColorOfThree = colorsEnum[keys2[Math.floor(keys2.length * Math.random())]]
-    console.log('newColorOfThree: ' + newColorOfThree)
     if ((blueCount !== 3) && (redCount !== 3) && (yellowCount !== 3)) {
       if ((newColorOfThree === 0) && (blueCount !== 3)) {
         // Change tile attribute
-        console.log('Something to blue')
         board[i].color = 'blue'
-        console.log(board[i].color)
         blueCount++
       } else if (newColorOfThree === 1 && redCount !== 3) {
-        console.log('Set something to red')
         board[i].color = 'red'
-        console.log(board[i].color)
         redCount++
       } else if (newColorOfThree === 2 && yellowCount !== 3) {
-        console.log('Set something to yellow')
         board[i].color = 'yellow'
-        console.log(board[i].color)
         yellowCount++
       }
     } else if (((blueCount === 3) && (redCount === 3)) || ((blueCount === 3) && (yellowCount === 3)) || ((redCount === 3) && (yellowCount === 3))) {
-      console.log('Two of three full')
       if ((blueCount === 3) && (redCount === 3)) {
-        console.log('Something to yellow')
         board[i].color = 'yellow'
-        console.log(board[i].color)
         yellowCount++
       } else if ((blueCount === 3) && (yellowCount === 3)) {
-        console.log('Something to red')
         board[i].color = 'red'
-        console.log(board[i].color)
         redCount++
       } else if ((redCount === 3) && (yellowCount === 3)) {
-        console.log('Something to blue')
         board[i].color = 'blue'
-        console.log(board[i].color)
         blueCount++
       } else {
         console.log('Something went wrong')
       }
     } else if ((blueCount === 3) || (redCount === 3) || (yellowCount === 3)) {
-      console.log('One of three full')
       if (blueCount === 3) {
-        console.log('Blue full')
         const newKeys = keys2.filter(function (value) {
           return value !== 'blue'
         })
-        console.log('Keys: ' + newKeys)
-        console.log('Newkeys length: ' + newKeys.length)
         const newColorOfTwo = colorsEnum[newKeys[Math.floor((newKeys.length - 1) * Math.random())]]
-        console.log(newColorOfTwo)
         if (newColorOfTwo === 0) {
-          console.log('Something to red')
           board[i].color = 'red'
-          console.log(board[i].color)
           redCount++
         } else if (newColorOfTwo === 1) {
-          console.log('Something to yellow')
           board[i].color = 'yellow'
-          console.log(board[i].color)
           yellowCount++
         }
       } else if (redCount === 3) {
-        console.log('Red full')
         const newKeys = keys2.filter(function (value) {
           return value !== 'red'
         })
-        console.log('Keys: ' + newKeys)
-        console.log(newKeys.length)
         const newColorOfTwo = colorsEnum[newKeys[Math.floor((newKeys.length - 1) * Math.random())]]
-        console.log(newColorOfTwo)
         if (newColorOfTwo === 0) {
-          console.log('Something to blue')
           board[i].color = 'blue'
-          console.log(board[i].color)
           blueCount++
         } else if (newColorOfTwo === 1) {
-          console.log('Something to yellow')
           board[i].color = 'yellow'
-          console.log(board[i].color)
           yellowCount++
         }
       } else if (yellowCount === 3) {
-        console.log('Yellow full')
         keys2 = keys2.filter(function (value) {
           return value !== 'yellow'
         })
-        console.log('Keys: ' + keys2)
         const newColorOfTwo = colorsEnum[keys2[Math.floor((keys2.length - 1) * Math.random())]]
         if (newColorOfTwo === 0) {
-          console.log('Something to blue')
           board[i].color = 'blue'
-          console.log(board[i].color)
           blueCount++
         } else if (newColorOfTwo === 1) {
-          console.log('Something to red')
           board[i].color = 'red'
-          console.log(board[i].color)
           redCount++
         }
       } else {
@@ -130,65 +89,94 @@ const getColor = function (board) {
 
 const tileAssign = function (board) {
   // Assign tiles
-  console.log('Got to tileAssign')
   board = getColor(board)
-  console.log('Called getColor')
   const c1r1 = document.querySelector('#board > div:nth-child(2)')
   c1r1.setAttribute('class', `column-left border ${board[0].color}`)
+  c1r1.setAttribute('id', 'tile0')
   const c2r1 = document.querySelector('#board > div:nth-child(3)')
   c2r1.setAttribute('class', `column-center border ${board[1].color}`)
+  c2r1.setAttribute('id', 'tile1')
   const c3r1 = document.querySelector('#board > div:nth-child(1)')
   c3r1.setAttribute('class', `column-right border ${board[2].color}`)
+  c3r1.setAttribute('id', 'tile2')
   const c1r2 = document.querySelector('#board > div:nth-child(5)')
   c1r2.setAttribute('class', `column-left border ${board[3].color}`)
+  c1r2.setAttribute('id', 'tile3')
   const c2r2 = document.querySelector('#board > div:nth-child(6)')
   c2r2.setAttribute('class', `column-center border ${board[4].color}`)
+  c2r2.setAttribute('id', 'tile4')
   const c3r2 = document.querySelector('#board > div:nth-child(4)')
   c3r2.setAttribute('class', `column-right border ${board[5].color}`)
+  c3r2.setAttribute('id', 'tile5')
   const c1r3 = document.querySelector('#board > div:nth-child(8)')
   c1r3.setAttribute('class', `column-left border ${board[6].color}`)
+  c1r3.setAttribute('id', 'tile6')
   const c2r3 = document.querySelector('#board > div:nth-child(9)')
   c2r3.setAttribute('class', `column-center border ${board[7].color}`)
+  c2r3.setAttribute('id', 'tile7')
   const c3r3 = document.querySelector('#board > div:nth-child(7)')
   c3r3.setAttribute('class', `column-right border ${board[8].color}`)
+  c3r3.setAttribute('id', 'tile8')
 }
 
 const game = function (clickColor) {
   // If color clicked is click color then turn it to grey
   // If player gets all three, WIN!
   // If player runs out of Time, LOSE!
-  let count = 0 
+  let count = 0
   const c1r1 = document.querySelector('#board > div:nth-child(2)')
-  count = c1r1.addEventListener('click', function (event) { onClick(event, count, clickColor, 'left') })
+  c1r1.addEventListener('click', function (event) { count = onClick(event, count, clickColor, 'left') })
   const c2r1 = document.querySelector('#board > div:nth-child(3)')
-  count = c2r1.addEventListener('click', function (event) { onClick(event, count, clickColor, 'center') })
+  c2r1.addEventListener('click', function (event) { count = onClick(event, count, clickColor, 'center') })
   const c3r1 = document.querySelector('#board > div:nth-child(1)')
-  count = c3r1.addEventListener('click', function (event) { onClick(event, count, clickColor, 'right') })
+  c3r1.addEventListener('click', function (event) { count = onClick(event, count, clickColor, 'right') })
   const c1r2 = document.querySelector('#board > div:nth-child(5)')
-  count = c1r2.addEventListener('click', function (event) { onClick(event, count, clickColor, 'left') })
+  c1r2.addEventListener('click', function (event) { count = onClick(event, count, clickColor, 'left') })
   const c2r2 = document.querySelector('#board > div:nth-child(6)')
-  count = c2r2.addEventListener('click', function (event) { onClick(event, count, clickColor, 'center') })
+  c2r2.addEventListener('click', function (event) { count = onClick(event, count, clickColor, 'center') })
   const c3r2 = document.querySelector('#board > div:nth-child(4)')
-  count = c3r2.addEventListener('click', function (event) { onClick(event, count, clickColor, 'right') })
+  c3r2.addEventListener('click', function (event) { count = onClick(event, count, clickColor, 'right') })
   const c1r3 = document.querySelector('#board > div:nth-child(8)')
-  count = c1r3.addEventListener('click', function (event) { onClick(event, count, clickColor, 'left') })
+  c1r3.addEventListener('click', function (event) { count = onClick(event, count, clickColor, 'left') })
   const c2r3 = document.querySelector('#board > div:nth-child(9)')
-  count = c2r3.addEventListener('click', function (event) { onClick(event, count, clickColor, 'center') })
+  c2r3.addEventListener('click', function (event) { count = onClick(event, count, clickColor, 'center') })
   const c3r3 = document.querySelector('#board > div:nth-child(7)')
-  count = c3r3.addEventListener('click', function (event) { onClick(event, count, clickColor, 'right') })
+  c3r3.addEventListener('click', function (event) { count = onClick(event, count, clickColor, 'right') })
 }
 
 const onClick = function (event, count, clickColor, pos) {
+  console.log(count)
   console.log(pos)
   const tar = event.target
+  console.log(tar)
   console.log(tar.id)
-  const modify = document.getElementById(`${event.target.id}`)
-  if (modify.class === `column-${pos} border ${clickColor}`) {
+  console.log(tar.class)
+  const modify = document.getElementById(`${tar.id}`)
+  console.log(modify)
+  console.log(modify.getAttribute('class'))
+  if (modify.getAttribute('class') === `column-${pos} border ${clickColor}`) {
     console.log('Went in here')
-    event.target.id.setAttribute('class', `column-${pos} border grey`)
+    tar.setAttribute('class', `column-${pos} border grey`)
+    count++
   }
-  count++
+  if (count === 3) {
+    console.log('Done')
+    restart()
+  }
   return count
+}
+
+const restart = function () {
+  const appendAt = document.getElementsByClassName('container')[0]
+  const winLabel = document.createElement('h2')
+  winLabel.innerHTML = 'You have won!'
+  winLabel.setAttribute('style', 'color:purple')
+  const winButton = document.createElement('button')
+  winButton.innerHTML = 'Play again?'
+  winButton.addEventListener('click', (event) => {
+    window.location.reload(false)
+  })
+  appendAt.appendChild(winLabel).appendChild(winButton)
 }
 
 const main = function () {
