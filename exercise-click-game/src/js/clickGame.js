@@ -196,6 +196,26 @@ const restartGame = function (value, time) {
     })
     appendAt.appendChild(winLabel).appendChild(winButton)
     // Display leaderboard
+    sessionStorage.setItem(`${time}`)
+    const itemsInStorage = Object.keys(sessionStorage)
+    const times = []
+    for (let i = 0; i < itemsInStorage.length; i++) {
+    // Get each player and time from storage
+      const itemFromStorage = sessionStorage.getItem(itemsInStorage[i])
+      const obj = { nickname: itemsInStorage[i], time: itemFromStorage }
+      times.push(obj)
+    }
+    // Sort players according to time
+    const orderedListOfTimes = times.sort((a, b) => { return a.time - b.time })
+    // Create leaderboard
+    const leaderBoardElement = document.createElement('h2')
+    leaderBoardElement.innerHTML = '<h2>Leaderboard</h2>'
+    appendAt.appendChild(leaderBoardElement)
+    for (let i = 0; i < orderedListOfTimes.length; i++) {
+      const displayPlayer = document.createElement('h3')
+      displayPlayer.innerHTML = `Times: ${i}`
+      appendAt.appendChild(displayPlayer)
+    }
   } else if (value === false) {
     // Display that they have failed
     const failMessage = document.createElement('h2')
